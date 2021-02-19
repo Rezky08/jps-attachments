@@ -90,7 +90,8 @@ trait AttachmentCreator
      */
     private function save(array $attributes)
     {
-        $attachment = new Attachment();
+        $class = config('attachment.model');
+        $attachment = new $class();
 
         $attachment->fill(
             Arr::only($attributes, ['title', 'mime', 'type', 'path', 'disk', 'options', 'description'])
