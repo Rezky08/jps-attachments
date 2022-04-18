@@ -54,7 +54,7 @@ class Attachment extends Model
      */
     public function getDiskAttribute()
     {
-        return $this->getOriginal('disk') ?? config('attachment.disk');
+        return $this->getAttributes()['disk'] ?? config('attachment.disk');
     }
 
     /**
@@ -71,7 +71,7 @@ class Attachment extends Model
         });
 
         static::registerModelEvent('forceDeleted', function (self $attachment) {
-            Storage::disk($attachment->getAttribute('disk'))->delete($attachment->getAttribute('path'));
+            Storage::disk($attachment->getDiskAttribute())->delete($attachment->getAttribute('path'));
         });
     }
 }

@@ -68,7 +68,7 @@ class AttachmentResponse
      */
     public function getAttachmentFile(Attachment $attachment)
     {
-        return $this->filesystem->disk($attachment->getAttribute('disk'))->get($attachment->getAttribute('path'));
+        return $this->filesystem->disk($attachment->getDiskAttribute())->get($attachment->getAttribute('path'));
     }
 
     /**
@@ -79,7 +79,7 @@ class AttachmentResponse
      */
     public function getAttachmentFilePath(Attachment $attachment)
     {
-        $basePath = config('filesystems.disks.'. $attachment->getAttribute('disk') .'.root');
+        $basePath = config('filesystems.disks.'. $attachment->getDiskAttribute() .'.root');
         return $basePath . "/" . $attachment->getAttribute('path');
     }
 
