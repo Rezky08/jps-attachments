@@ -35,7 +35,7 @@ class Attachment extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'mime', 'path', 'type', 'description', 'options'
+        'title', 'mime', 'disk', 'path', 'type', 'description', 'options'
     ];
 
     /**
@@ -67,7 +67,7 @@ class Attachment extends Model
         parent::boot();
 
         static::creating(function (self $attachment) {
-            $attachment->setAttribute($attachment->getKeyName(), (string) Str::orderedUuid()->toString());
+            $attachment->setAttribute($attachment->getKeyName(), (string)Str::orderedUuid()->toString());
         });
 
         static::registerModelEvent('forceDeleted', function (self $attachment) {
